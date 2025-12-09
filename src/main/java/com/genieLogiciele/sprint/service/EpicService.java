@@ -1,22 +1,23 @@
 package com.genieLogiciele.sprint.service;
 
 import com.genieLogiciele.sprint.entities.Epic;
-import com.genieLogiciele.sprint.entities.ProductBacklog;
+
 import com.genieLogiciele.sprint.exception.EntityNotFound;
-import com.genieLogiciele.sprint.repo.BacklogRepo;
+
 import com.genieLogiciele.sprint.repo.EpicRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class EpicService {
-    @Autowired
-    private EpicRepo epicRepo;
+    private final EpicRepo epicRepo;
 
-    //@Autowired
-    //private BacklogRepo backlogRepo;
+    public EpicService(EpicRepo epicRepo) {
+        this.epicRepo = epicRepo;
+    }
+
 
     public Epic addEpic(Epic epic)
     {
@@ -29,7 +30,7 @@ public class EpicService {
         e.setTitre(epic.getTitre());
         e.setDescription(epic.getDescription());
         e.setProductBacklog(epic.getProductBacklog());
-        //e.setUserStories(epic.getUserStories());
+
 
         return  epicRepo.save(epic);
     }

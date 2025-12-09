@@ -1,7 +1,5 @@
 package com.genieLogiciele.sprint.controller;
 
-import com.genieLogiciele.sprint.dto.ProductBacklogRequest;
-import com.genieLogiciele.sprint.entities.Epic;
 import com.genieLogiciele.sprint.entities.UserStory;
 import com.genieLogiciele.sprint.service.BacklogService;
 import com.genieLogiciele.sprint.service.EpicService;

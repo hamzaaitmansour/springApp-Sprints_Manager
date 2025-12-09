@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class BacklogService {
@@ -24,7 +24,9 @@ public class BacklogService {
     @Autowired
     private ProjetRepo projetRepo;
 
-    public ProductBacklog addProduct(ProductBacklogRequest rq) // Affecter une epic a une
+    public ProductBacklog addProduct(ProductBacklogRequest rq)
+    // Affecter une epic a une
+    // Hihi d
     {   ProductBacklog product = new ProductBacklog();
         Epic epic=ep.findById(rq.getEpic_id()).orElseThrow();
         Projet projet = projetRepo.findById(rq.getProjet_id()).orElseThrow(()->new RuntimeException("Projet not found"));
@@ -60,7 +62,6 @@ public class BacklogService {
 
         return backlogRepo.save(pr);
     }
-
     public ProductBacklogResponse getProduct(Long id) {
         ProductBacklog pr = backlogRepo.findById(id).orElseThrow(()->new RuntimeException("Product not found"));
         ProductBacklogResponse prr = new ProductBacklogResponse();
