@@ -1,7 +1,7 @@
 package com.genieLogiciele.sprint.controller;
 import com.genieLogiciele.sprint.entities.Epic;
 import com.genieLogiciele.sprint.service.EpicService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/epic")
 public class EpicController {
 
-    @Autowired
-    private EpicService epicService;
+    private final EpicService epicService;
+
+    public EpicController(EpicService epicService) {
+        this.epicService = epicService;
+    }
 
     @PostMapping("")
     public ResponseEntity<Epic> addEpic(@RequestBody Epic epic)

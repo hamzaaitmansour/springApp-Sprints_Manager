@@ -8,7 +8,7 @@ import com.genieLogiciele.sprint.entities.Projet;
 import com.genieLogiciele.sprint.repo.BacklogRepo;
 import com.genieLogiciele.sprint.repo.EpicRepo;
 import com.genieLogiciele.sprint.repo.ProjetRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,16 +17,18 @@ import java.util.List;
 
 @Service
 public class BacklogService {
-    @Autowired
-    private BacklogRepo backlogRepo;
-    @Autowired
-    private EpicRepo ep;
-    @Autowired
-    private ProjetRepo projetRepo;
+    private final BacklogRepo backlogRepo;
+    private final EpicRepo ep;
+    private final ProjetRepo projetRepo;
+
+    public BacklogService(BacklogRepo backlogRepo, EpicRepo ep, ProjetRepo projetRepo) {
+        this.backlogRepo = backlogRepo;
+        this.ep = ep;
+        this.projetRepo = projetRepo;
+    }
 
     public ProductBacklog addProduct(ProductBacklogRequest rq)
-    // Affecter une epic a une
-    // Hihi d
+
     {   ProductBacklog product = new ProductBacklog();
         Epic epic=ep.findById(rq.getEpic_id()).orElseThrow();
         Projet projet = projetRepo.findById(rq.getProjet_id()).orElseThrow(()->new RuntimeException("Projet not found"));

@@ -5,7 +5,7 @@ import com.genieLogiciele.sprint.entities.UserStory;
 import com.genieLogiciele.sprint.exception.EntityNotFound;
 import com.genieLogiciele.sprint.repo.EpicRepo;
 import com.genieLogiciele.sprint.repo.UserStoryRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +13,15 @@ import java.util.List;
 @Service
 public class UserStorySerice {
 
-    @Autowired
+    final
     UserStoryRepo userStoryRepo;
-    @Autowired
+    final
     EpicRepo epicRepo;
+
+    public UserStorySerice(UserStoryRepo userStoryRepo, EpicRepo epicRepo) {
+        this.userStoryRepo = userStoryRepo;
+        this.epicRepo = epicRepo;
+    }
 
     public   UserStory addUserStory(UserStory userStory,Long id)
     {

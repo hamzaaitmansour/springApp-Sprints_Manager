@@ -1,7 +1,7 @@
 package com.genieLogiciele.sprint.config;
 
 import com.genieLogiciele.sprint.service.UserAppService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,18 +23,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired
-    private UserAppService userAppService;
+    private final UserAppService userAppService;
 
-    @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    @Autowired
-    private JwtFilter jwtFilter;
+    private final JwtFilter jwtFilter;
+
+    public SecurityConfig(UserAppService userAppService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtFilter jwtFilter) {
+        this.userAppService = userAppService;
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.jwtFilter = jwtFilter;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        System.out.println("Chargement de SecurityFilterChain...");
+
         http
                 .csrf(csrf -> csrf.disable()) // Désactiver CSRF car on utilise JWT
                 .cors(cors -> cors.configure(http)) // Activer CORS

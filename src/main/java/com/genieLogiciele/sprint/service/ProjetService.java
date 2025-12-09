@@ -3,7 +3,7 @@ package com.genieLogiciele.sprint.service;
 import com.genieLogiciele.sprint.entities.Projet;
 import com.genieLogiciele.sprint.exception.EntityAlreadyExist;
 import com.genieLogiciele.sprint.repo.ProjetRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +11,11 @@ import java.util.List;
 @Service
 public class ProjetService {
 
-    @Autowired
-    private ProjetRepo projetRepo;
+    private final ProjetRepo projetRepo;
+
+    public ProjetService(ProjetRepo projetRepo) {
+        this.projetRepo = projetRepo;
+    }
 
     public Projet add(Projet projet)
     {

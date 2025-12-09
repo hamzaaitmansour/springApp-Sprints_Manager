@@ -6,7 +6,7 @@ import com.genieLogiciele.sprint.repo.UserAppRepo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +23,9 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     private final String secretKey;
-    @Autowired
-    private UserAppRepo userAppRepo;
+    private final UserAppRepo userAppRepo;
 
-    public JwtService() {
+    public JwtService(UserAppRepo userAppRepo) {
         try {
             KeyGenerator kGen = KeyGenerator.getInstance("HmacSHA256");
             kGen.init(256); // Ensure key size is 256 bits
@@ -35,6 +34,7 @@ public class JwtService {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Error generating secret key", e);
         }
+        this.userAppRepo = userAppRepo;
     }
 
     public String generateToken(UserDetails userDetails) {

@@ -5,7 +5,7 @@ import com.genieLogiciele.sprint.entities.UserApp;
 import com.genieLogiciele.sprint.repo.UserAppRepo;
 import com.genieLogiciele.sprint.service.UserAppService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,12 +17,16 @@ import java.util.Map;
 @RequestMapping("/api")
 public class UserController {
 
-    @Autowired
+    final
     UserAppService userAppService;
-    @Autowired
-    private UserAppRepo userAppRepo;
+    private final UserAppRepo userAppRepo;
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    public UserController(UserAppService userAppService, UserAppRepo userAppRepo) {
+        this.userAppService = userAppService;
+        this.userAppRepo = userAppRepo;
+    }
 
 
     @PostMapping("/auth/login")

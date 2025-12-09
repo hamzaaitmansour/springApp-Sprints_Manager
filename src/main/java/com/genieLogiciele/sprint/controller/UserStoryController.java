@@ -4,7 +4,7 @@ import com.genieLogiciele.sprint.entities.UserStory;
 import com.genieLogiciele.sprint.service.BacklogService;
 import com.genieLogiciele.sprint.service.EpicService;
 import com.genieLogiciele.sprint.service.UserStorySerice;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +15,17 @@ import java.util.List;
 @RequestMapping("/api/userstory")
 public class UserStoryController {
 
-    @Autowired
-    private EpicService epicService;
+    private final EpicService epicService;
 
-    @Autowired
-    private UserStorySerice userStorySerice;
+    private final UserStorySerice userStorySerice;
 
-    @Autowired
-    private BacklogService backlogService;
+    private final BacklogService backlogService;
+
+    public UserStoryController(EpicService epicService, UserStorySerice userStorySerice, BacklogService backlogService) {
+        this.epicService = epicService;
+        this.userStorySerice = userStorySerice;
+        this.backlogService = backlogService;
+    }
 
 
     @PostMapping("/{id}")

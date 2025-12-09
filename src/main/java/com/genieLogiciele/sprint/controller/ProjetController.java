@@ -2,7 +2,7 @@ package com.genieLogiciele.sprint.controller;
 
 import com.genieLogiciele.sprint.entities.Projet;
 import com.genieLogiciele.sprint.service.ProjetService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/projet")
 public class ProjetController {
-    @Autowired
-    private ProjetService projetService;
+    private final ProjetService projetService;
+
+    public ProjetController(ProjetService projetService) {
+        this.projetService = projetService;
+    }
+
     @PostMapping("")
     public ResponseEntity<Projet> addProjet(@RequestBody Projet projet)
     {

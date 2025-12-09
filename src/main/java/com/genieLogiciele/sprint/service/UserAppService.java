@@ -6,7 +6,6 @@ import com.genieLogiciele.sprint.entities.UserPrincipal;
 import com.genieLogiciele.sprint.exception.EntityAlreadyExist;
 import com.genieLogiciele.sprint.repo.UserAppRepo;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,17 +14,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserAppService implements UserDetailsService {
-    @Autowired
-    private UserAppRepo userRepo;
+    private final UserAppRepo userRepo;
 
-    @Autowired
-    private JwtService jwtService;
+    private final JwtService jwtService;
 
     private BCryptPasswordEncoder encoder=new BCryptPasswordEncoder(); // Injecté correctement
-    @Autowired
-    private UserAppRepo userAppRepo;
+    private final UserAppRepo userAppRepo;
 
-    public UserAppService() {}
+    public UserAppService(UserAppRepo userRepo, JwtService jwtService, UserAppRepo userAppRepo) {
+        this.userRepo = userRepo;
+        this.jwtService = jwtService;
+        this.userAppRepo = userAppRepo;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
